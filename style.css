@@ -1,0 +1,499 @@
+/* ========== RESET + VARIABLES ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+:root {
+  --brown: #4b2e1e;      /* main dark color */
+  --caramel: #c58940;    /* accent color */
+  --cream: #faf3e8;      /* light background */
+  --text: #2b2b2b;
+  --white: #ffffff;
+}
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ========== NAVBAR (Flexbox) ========== */
+.navbar {
+  position: sticky;           /* stays at top while scrolling */
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 8%;
+  background: var(--brown);
+  color: var(--white);
+}
+
+/* ========== LOGO ========== */
+.logo {
+  display: flex;               /* puts the image and name side by side */
+  align-items: center;         /* keeps them vertically centered */
+  gap: 10px;                   /* space between logo and name */
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.logo img {
+  width: 45px;                 /* logo size */
+  height: 45px;
+  object-fit: contain;         /* shows the full logo without cropping */
+  border-radius: 0;            /* removes the rounded corners from the global img rule */
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--caramel);
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;            /* needed for the warm overlay layer */
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 8%;
+  color: var(--white);
+
+  /* your photo in the background */
+  background-image: url('1__JUHU.webp');
+  background-size: cover;        /* photo fills the whole area */
+  background-position: center;   /* keeps the middle of the photo visible */
+  background-repeat: no-repeat;
+}
+
+/* Warm effect: a brown/orange layer on top of the photo, behind the text */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;                      /* covers the whole hero */
+  background: linear-gradient(
+    to bottom,
+    rgba(75, 46, 30, 0.55),      /* dark brown at top */
+    rgba(197, 137, 64, 0.45)     /* warm caramel at bottom */
+  );
+}
+
+
+/* Text stays in front of the warm layer */
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);   /* makes text easier to read */
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 28px;
+  font-weight: 300;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ========== BUTTON ========== */
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: var(--caramel);
+  color: var(--white);
+  border: none;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.btn:hover {
+  background: #a9702f;
+  transform: translateY(-3px);
+}
+
+/* ========== SECTIONS ========== */
+.section {
+  padding: 80px 8%;
+}
+
+.section-light {
+  background: var(--cream);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  text-align: center;
+  color: var(--brown);
+  margin-bottom: 48px;
+}
+
+/* ========== IMAGE PLACEHOLDER ========== */
+.img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  background: #e6d5bd;
+  color: #7a5c3e;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.img-placeholder.small {
+  min-height: 170px;
+  border-radius: 12px 12px 0 0;
+}
+
+/* If you use real <img> tags, this keeps them neat */
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ========== ABOUT (Grid) ========== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-text h3 {
+  font-size: 1.5rem;
+  color: var(--brown);
+  margin-bottom: 12px;
+}
+
+.about-text p {
+  margin-bottom: 12px;
+}
+
+
+/* ========== ABOUT: photo fixed in a box ========== */
+/* ========== ABOUT: layout ========== */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 400px) 1fr;  /* photo column is limited, text takes the rest */
+  gap: 60px;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;              /* keeps everything centered on big screens */
+}
+
+/* ========== ABOUT: photo in a portrait frame ========== */
+.about-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;         /* portrait frame: always 4 wide, 5 tall */
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* fills the frame without stretching */
+  object-position: center top; /* keeps your head and face visible */
+  display: block;
+}
+/* ========== MENU CARDS (Grid) ========== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ========== MENU CARD PHOTOS ========== */
+.card-img {
+  height: 200px;               /* fixed photo box, same for all cards */
+  overflow: hidden;            /* hides the extra part of big photos */
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* fills the box without stretching */
+  object-position: center;
+  border-radius: 0;            /* the card already has rounded top corners */
+  display: block;
+  transition: transform 0.4s;
+}
+
+/* Photo zooms in slowly when you hover on the card */
+.card:hover .card-img img {
+  transform: scale(1.08);
+}
+
+.card-body {
+  padding: 18px;
+}
+
+.card-body h3 {
+  color: var(--brown);
+  margin-bottom: 6px;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-weight: 500;
+  color: var(--caramel);
+}
+
+  .card-img {
+    height: 180px;
+  }
+  
+/* ========== GALLERY (Grid) ========== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+
+.gallery-grid .img-placeholder:hover {
+  transform: scale(1.03);
+}
+
+/* ========== GALLERY PHOTOS ========== */
+.gallery-item {
+  height: 260px;               /* fixed box, same for all photos */
+  overflow: hidden;            /* keeps the zoom effect inside the box */
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* fills the box without stretching */
+  object-position: center;
+  border-radius: 0;
+  display: block;
+  transition: transform 0.4s, filter 0.4s;
+}
+
+/* Hover: photo zooms in and gets a little brighter */
+.gallery-item:hover img {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+/* ========== CONTACT ========== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.contact-info h3 {
+  color: var(--brown);
+  margin: 16px 0 6px;
+}
+
+.contact-info h3:first-child {
+  margin-top: 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 14px;
+  border: 1px solid #d8c7ae;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--caramel);
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--brown);
+  color: var(--white);
+  text-align: center;
+  padding: 22px;
+  font-size: 0.9rem;
+}
+
+/* ========== RESPONSIVE (tablet) ========== */
+@media (max-width: 900px) {
+  .menu-grid,
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========== RESPONSIVE (phone) ========== */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    gap: 16px;
+    font-size: 0.9rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .about-grid,
+  .contact-grid,
+  .menu-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 60px 6%;
+  }
+}
+
+/* ========== SECTION BACKGROUND PHOTOS ========== */
+
+/* Shared setup: every photo section gets a layer for the overlay */
+#about,
+#menu,
+#gallery,
+#contact {
+  position: relative;            /* needed for the overlay layer */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* The overlay layer sits on top of the photo, behind the content */
+#about::before,
+#menu::before,
+#gallery::before,
+#contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;                      /* covers the whole section */
+}
+
+/* Content stays in front of the overlay */
+#about > *,
+#menu > *,
+#gallery > *,
+#contact > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- ABOUT: light cream overlay, so brown text stays easy to read ---- */
+#about {
+  background-image: url('2_CafesNew.png');
+}
+#about::before {
+  background: rgba(250, 243, 232, 0.88);
+}
+
+/* ---- MENU: dark warm overlay, white title, white cards on top ---- */
+#menu {
+  background-image: url('3_CafesNew.png');
+}
+#menu::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(75, 46, 30, 0.80),
+    rgba(120, 75, 40, 0.75)
+  );
+}
+#menu .section-title {
+  color: var(--white);
+}
+
+/* ---- GALLERY: dark overlay, white title ---- */
+#gallery {
+  background-image: url('4_CafesNew.png');
+}
+#gallery::before {
+  background: rgba(40, 25, 15, 0.82);
+}
+#gallery .section-title {
+  color: var(--white);
+}
+
+/* ---- CONTACT: light overlay, same idea as About ---- */
+#contact {
+  background-image: url('5_cafesNew.png');
+}
+#contact::before {
+  background: rgba(250, 243, 232, 0.90);
+}
