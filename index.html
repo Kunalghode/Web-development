@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 
@@ -169,6 +170,85 @@
     </div>
   </section>
 
+
+
+  <!-- ========== SEAT BOOKING ========== -->
+  <section class="section" id="booking">
+    <h2 class="section-title">Book a Seat</h2>
+
+    <div class="booking-box">
+
+      <!-- Progress bar -->
+      <div class="progress">
+        <div class="progress-step active"><span>1</span> Details</div>
+        <div class="progress-line"></div>
+        <div class="progress-step"><span>2</span> Choose Table</div>
+        <div class="progress-line"></div>
+        <div class="progress-step"><span>3</span> Done</div>
+      </div>
+
+      <!-- STEP 1: details -->
+      <div class="booking-step active" id="step-1">
+        <div class="booking-form">
+          <label for="booking-date">Date</label>
+          <input type="date" id="booking-date">
+
+          <label for="booking-time">Time</label>
+          <select id="booking-time">
+            <option value="10:00">10:00 AM</option>
+            <option value="12:00">12:00 PM</option>
+            <option value="14:00">02:00 PM</option>
+            <option value="16:00">04:00 PM</option>
+            <option value="18:00">06:00 PM</option>
+            <option value="20:00">08:00 PM</option>
+          </select>
+
+          <label for="booking-name">Your Name</label>
+          <input type="text" id="booking-name" placeholder="Your name">
+
+          <label for="booking-phone">Phone Number</label>
+          <input type="tel" id="booking-phone" placeholder="10-digit phone number">
+        </div>
+
+        <p class="booking-message" id="step1-message"></p>
+        <button type="button" class="btn" id="confirm-details-btn">Confirm Booking</button>
+      </div>
+
+      <!-- STEP 2: choose table -->
+      <div class="booking-step" id="step-2">
+        <p class="booking-summary" id="booking-summary"></p>
+
+        <div class="legend">
+          <span><i class="dot dot-free"></i> Available</span>
+          <span><i class="dot dot-selected"></i> Selected</span>
+          <span><i class="dot dot-booked"></i> Booked</span>
+        </div>
+
+        <!-- JavaScript creates the table buttons here -->
+        <div class="seat-grid" id="seat-grid"></div>
+
+        <p id="selected-info">No table selected</p>
+        <p class="booking-message" id="step2-message"></p>
+
+        <div class="button-row">
+          <button type="button" class="btn btn-outline" id="back-btn">Back</button>
+          <button type="button" class="btn" id="confirm-seat-btn">Confirm Seat</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: success -->
+      <div class="booking-step" id="step-3">
+        <div class="success-box">
+          <div class="success-icon">✓</div>
+          <h3>Booking Confirmed</h3>
+          <p class="booking-summary" id="final-summary"></p>
+          <button type="button" class="btn" id="new-booking-btn">Book Another Seat</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ========== CONTACT ========== -->
   <section class="section section-light" id="contact">
     <h2 class="section-title">Contact Us</h2>
@@ -193,9 +273,10 @@
   </section>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="footer">
+    <footer class="footer">
     <p>&copy; 2026 Kunal Cafe. All rights reserved.</p>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>

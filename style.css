@@ -424,76 +424,229 @@ img {
   }
 }
 
-/* ========== SECTION BACKGROUND PHOTOS ========== */
-
-/* Shared setup: every photo section gets a layer for the overlay */
-#about,
-#menu,
-#gallery,
-#contact {
-  position: relative;            /* needed for the overlay layer */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* ========== SEAT BOOKING ========== */
+.booking-box {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px;
+  background: var(--cream);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* The overlay layer sits on top of the photo, behind the content */
-#about::before,
-#menu::before,
-#gallery::before,
-#contact::before {
-  content: "";
-  position: absolute;
-  inset: 0;                      /* covers the whole section */
+/* ---- Progress bar ---- */
+.progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  font-size: 0.85rem;
+  color: #9a8a76;
 }
 
-/* Content stays in front of the overlay */
-#about > *,
-#menu > *,
-#gallery > *,
-#contact > * {
-  position: relative;
-  z-index: 1;
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* ---- ABOUT: light cream overlay, so brown text stays easy to read ---- */
-#about {
-  background-image: url('2_CafesNew.png');
-}
-#about::before {
-  background: rgba(250, 243, 232, 0.88);
+.progress-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e6d5bd;
+  color: var(--brown);
+  font-weight: 500;
 }
 
-/* ---- MENU: dark warm overlay, white title, white cards on top ---- */
-#menu {
-  background-image: url('3_CafesNew.png');
+.progress-step.active { color: var(--brown); font-weight: 500; }
+.progress-step.active span { background: var(--caramel); color: var(--white); }
+.progress-step.done span { background: var(--brown); color: var(--white); }
+
+.progress-line {
+  flex: 1;
+  height: 2px;
+  background: #e6d5bd;
 }
-#menu::before {
-  background: linear-gradient(
-    to bottom,
-    rgba(75, 46, 30, 0.80),
-    rgba(120, 75, 40, 0.75)
-  );
+
+/* ---- Steps: only the active one shows ---- */
+.booking-step {
+  display: none;
 }
-#menu .section-title {
+
+.booking-step.active {
+  display: block;
+}
+
+/* ---- Step 1 form ---- */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.booking-form label {
+  font-weight: 500;
+  color: var(--brown);
+  margin-top: 8px;
+}
+
+.booking-form input,
+.booking-form select {
+  padding: 12px 14px;
+  border: 1px solid #d8c7ae;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: var(--white);
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+  outline: none;
+  border-color: var(--caramel);
+}
+
+/* ---- Messages ---- */
+.booking-message {
+  min-height: 24px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.booking-message.error { color: #b3261e; }
+
+/* ---- Step 2 ---- */
+.booking-summary {
+  white-space: pre-line;       /* shows line breaks from JavaScript */
+  color: var(--brown);
+  margin-bottom: 16px;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.dot-free     { background: var(--white); border: 2px solid var(--caramel); }
+.dot-selected { background: var(--caramel); }
+.dot-booked   { background: #bdbdbd; }
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.seat {
+  padding: 14px 0;
+  background: var(--white);
+  border: 2px solid var(--caramel);
+  border-radius: 10px;
+  color: var(--brown);
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.seat:hover { transform: translateY(-3px); }
+
+.seat.selected {
+  background: var(--caramel);
   color: var(--white);
 }
 
-/* ---- GALLERY: dark overlay, white title ---- */
-#gallery {
-  background-image: url('4_CafesNew.png');
+.seat.booked {
+  background: #bdbdbd;
+  border-color: #bdbdbd;
+  color: #777;
+  cursor: not-allowed;
 }
-#gallery::before {
-  background: rgba(40, 25, 15, 0.82);
+
+.seat.booked:hover { transform: none; }
+
+#selected-info {
+  margin-bottom: 8px;
+  color: var(--brown);
 }
-#gallery .section-title {
+
+.button-row {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--brown);
+  border: 2px solid var(--brown);
+}
+
+.btn-outline:hover {
+  background: var(--brown);
   color: var(--white);
 }
 
-/* ---- CONTACT: light overlay, same idea as About ---- */
-#contact {
-  background-image: url('5_cafesNew.png');
+/* ---- Step 3 ---- */
+.success-box {
+  text-align: center;
 }
-#contact::before {
-  background: rgba(250, 243, 232, 0.90);
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #2e7d32;
+  color: var(--white);
+  font-size: 2rem;
 }
+
+.success-box h3 {
+  color: var(--brown);
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+
+ 
+
+ /* ========== BOOKING: phone version ========== */
+@media (max-width: 600px) {
+  .booking-box {
+    padding: 20px;
+  }
+
+  .progress {
+    font-size: 0;              /* hides the step names on small screens */
+  }
+
+  .progress-step span {
+    font-size: 0.85rem;        /* keeps the step numbers visible */
+  }
+}
+
+  .card-img {
+    height: 180px;
+  }
