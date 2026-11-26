@@ -150,6 +150,94 @@ ul {
   transform: translateY(-3px);
 }
 
+
+/* ========== SECTION BACKGROUND PHOTOS ========== */
+
+/* Shared setup: every photo section gets a layer for the overlay */
+#about,
+#menu,
+#gallery,
+#booking,
+#contact {
+  position: relative;            /* needed for the overlay layer */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* The overlay layer sits on top of the photo, behind the content */
+#about::before,
+#menu::before,
+#gallery::before,
+#booking::before,
+#contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;                      /* covers the whole section */
+}
+
+/* Content stays in front of the overlay */
+#about > *,
+#menu > *,
+#gallery > *,
+#booking > *,
+#contact > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- ABOUT ---- */
+#about {
+  background-image: url('ColdDrink.jpg');     /* change to your file name */
+}
+#about::before {
+  background: rgba(250, 243, 232, 0.88);
+}
+
+/* ---- MENU ---- */
+#menu {
+  background-image: url('AboutPage.jpg');      /* change to your file name */
+}
+#menu::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(75, 46, 30, 0.80),
+    rgba(120, 75, 40, 0.75)
+  );
+}
+#menu .section-title {
+  color: var(--white);
+}
+
+/* ---- GALLERY ---- */
+#gallery {
+  background-image: url('Green.jpg');   /* change to your file name */
+}
+#gallery::before {
+  background: rgba(40, 25, 15, 0.82);
+}
+#gallery .section-title {
+  color: var(--white);
+}
+
+/* ---- BOOKING ---- */
+#booking {
+  background-image: url('Kunal.png');   /* change to your file name */
+}
+#booking::before {
+  background: rgba(75, 46, 30, 0.80);
+}
+#booking .section-title {
+  color: var(--white);
+}
+
+/* ---- CONTACT ---- */
+#contact {
+  background-image: url('Contact.jpg');   /* change to your file name */
+}
+#contact::before {
+  background: rgba(250, 243, 232, 0.90);
+}
 /* ========== SECTIONS ========== */
 .section {
   padding: 80px 8%;
